@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.fx.Controller" stylesheets="@main.css" styleClass="main">
+    <padding>
+        <Insets top="10" bottom="10" left="10" right="10"/>
+    </padding>
+    <top>
+        <VBox>
+            <HBox spacing="10">
+                <Label text="Find rate on: " styleClass="labelHeader"/>
+                <DatePicker fx:id="date" onAction="#changeDate" styleClass="box"/>
+                <Label text="Filter Currency: " styleClass="labelHeader"/>
+                <TextField fx:id="filterField" styleClass="box"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="currencyList" styleClass="table">
+            <columns>
+                <TableColumn styleClass="column" text="Currency" prefWidth="380">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="name"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn styleClass="column" text="Rate" prefWidth="380">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="rate"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </center>
+    <bottom>
+        <HBox>
+            <padding>
+                <Insets top="10"/>
+            </padding>
+            <Label text="Conversion amount:" prefWidth="150" styleClass="labelHeader"/>
+            <TextField fx:id="quantity" prefWidth="100" />
+            <ComboBox fx:id="convert1" prefWidth="100" editable="true"/>
+            <Label text=" = "/>
+            <TextField fx:id="value" prefWidth="100" editable="false"/>
+            <ComboBox fx:id="convert2" prefWidth="100" editable="true"/>
+        </HBox>
+
+    </bottom>
+
+</BorderPane>

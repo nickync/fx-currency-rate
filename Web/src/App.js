@@ -7,7 +7,7 @@ import Conversion from './component/Conversion';
 
 function App() {
   return (
-    <div>
+    <div className="container-fluid">
         <Header />
         <CurrencyPanel />
     </div>

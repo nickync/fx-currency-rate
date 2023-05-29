@@ -36,7 +36,7 @@ export default function Conversion({data}) {
             setCalculated(amount * rate2)
         } else if (over == "usd"){
             setCalculated(amount * (1 / rate1))
-        } else {
+        }else {
             setCalculated(amount * ((1 / rate1) * rate2))
         }
 
@@ -48,7 +48,7 @@ export default function Conversion({data}) {
     },[selected, selectedBase, amount])
 
   return (
-    <div className="w-75 mx-auto">
+    <div className="mx-auto">
         <div className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">Conversion</div>
         <div className="d-flex">
             <InputGroup size="sm">

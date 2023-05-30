@@ -57,7 +57,7 @@ export default function Conversion({data}) {
             </InputGroup>
             <InputGroup size="sm">
                 <InputGroup.Text>Currency</InputGroup.Text>
-                <Typeahead className="control-group" id="valid" options={ccy} selected={selected} onChange={setSelected}/>
+                <Typeahead id="valid" options={ccy} selected={selected} onChange={setSelected}/>
             </InputGroup>
             <InputGroup size="sm">
                 <InputGroup.Text>Converted amount</InputGroup.Text>

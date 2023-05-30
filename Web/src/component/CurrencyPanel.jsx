@@ -2,6 +2,7 @@ import { Form, FormControl, InputGroup, Modal, Table } from "react-bootstrap";
 import { getDefinition, getRate } from "../api/curencyAPI";
 import { useEffect, useState } from "react";
 import Conversion from "./Conversion";
+import LineGraph from "./LineGraph";
 
 export default function CurrencyPanel() {
   const [data, setData] = useState([])
@@ -52,9 +53,16 @@ export default function CurrencyPanel() {
     })
     }, [date])
 
+    const [ccy, setCcy] = useState('')
+
+    const onClic = (ccy) => {
+      setCcy(ccy)
+    }
+
   return (
     <>
       <Conversion data={data}/>
+      <LineGraph ccy={ccy}/>
       <div className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">All Rate Information</div>
       <div className="d-flex mx-auto my-1">
         <InputGroup size="sm" className="pe-1">
@@ -89,6 +97,7 @@ export default function CurrencyPanel() {
                           <tr key={row[0]}>
                             <th>{row[0]}</th>
                             <th>{row[1]}</th>
+                            <th><button  onClick={() => onClic(row[0])}>asdf</button></th>
                           </tr>)}
           </tbody>
         </Table>

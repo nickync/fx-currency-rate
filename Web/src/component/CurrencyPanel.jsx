@@ -70,7 +70,7 @@ export default function CurrencyPanel() {
       {show ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Free version of this app only contains data from 01-01-2022, some dates might be unavailable.</div> : ""}
       <div className="mx-auto my-1" style={{maxHeight:"70vh", overflowY:"auto"}}>
         <Table striped bordered hover className="w-100 mx-auto text-center">
-          <thead className="sticky-top">
+          <thead>
             <tr className="table-dark">
               <th>Currency</th>
               <th>Rate ( 1 USD equals )</th>

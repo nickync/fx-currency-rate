@@ -54,8 +54,8 @@ export default function CurrencyPanel() {
 
   return (
     <>
-      <div className="d-flex w-75 mx-auto">
-        <InputGroup size="sm" className="pe-5">
+      <div className="d-flex mx-auto my-1">
+        <InputGroup size="sm" className="pe-1">
           <InputGroup.Text>Enter a date: </InputGroup.Text>
           <Form.Control placeholder="today" type="date" onChange={handleDateChange}></Form.Control>
         </InputGroup>
@@ -66,7 +66,7 @@ export default function CurrencyPanel() {
         </InputGroup>
       </div>
       {show ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Free version of this app only contains data from 01-01-2022, some dates might be unavailable.</div> : ""}
-      <div className="w-75 mx-auto" style={{maxHeight:"600px", overflowY:"auto"}}>
+      <div className="mx-auto my-1" style={{maxHeight:"70vh", overflowY:"auto"}}>
         <Table striped bordered hover className="w-100 mx-auto text-center">
           <thead className="sticky-top">
             <tr className="table-dark">

@@ -7,9 +7,12 @@ import Conversion from './component/Conversion';
 
 function App() {
   return (
-    <div className="container-fluid">
+    <div>
         <Header />
         <CurrencyPanel />
+        <div className='footer bg-dark fixed-bottom'>
+          <div className='footer text-secondary text-center'>Zen</div>
+        </div>
     </div>
   );
 }

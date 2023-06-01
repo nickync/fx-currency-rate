@@ -1,23 +1,20 @@
 import CanvasJSReact from "@canvasjs/react-charts"
-import { getRate } from "../api/curencyAPI";
-import { useEffect, useState } from "react";
-import { data } from "@tensorflow/tfjs";
 
 export default function LineGraph({option}) {
     var CanvasJS = CanvasJSReact.CanvasJS;
     var CanvasJSChart = CanvasJSReact.CanvasJSChart;
     
-    function format (date) {  
-        if (!(date instanceof Date)) {
-          return date
-        }
+    // function format (date) {  
+    //     if (!(date instanceof Date)) {
+    //       return date
+    //     }
     
-        const year = date.getFullYear()
-        const month = String(date.getMonth() + 1).padStart(2, '0')
-        const day = String(date.getDate()).padStart(2, '0')
+    //     const year = date.getFullYear()
+    //     const month = String(date.getMonth() + 1).padStart(2, '0')
+    //     const day = String(date.getDate()).padStart(2, '0')
       
-        return `${year}-${month}-${day}`
-    }
+    //     return `${year}-${month}-${day}`
+    // }
 
     // const [cccy, setCcy] = useState("")
     // const [dataPoints, setDataPoints] = useState([])

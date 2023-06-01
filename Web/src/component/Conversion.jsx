@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Form, FormControl, InputGroup } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 
 export default function Conversion({data}) {
     const [ccy, setCcy] = useState(data)
-    const [isValid, setValid] = useState(null)
     const [selected, setSelected] = useState([])
     const [selectedBase, setSelectedBase] = useState([])  
     const [calculated, setCalculated] = useState(0)
@@ -25,16 +24,16 @@ export default function Conversion({data}) {
         let rate1, rate2
 
         data.filter(i => {
-            if (i[0] == base){
+            if (i[0] === base){
                 rate1 = i[1]
-            } else if (i[0] == over){
+            } else if (i[0] === over){
                 rate2 = i[1]
             }
         })
 
-        if (base == "usd"){
+        if (base === "usd"){
             setCalculated(amount * rate2)
-        } else if (over == "usd"){
+        } else if (over ==="usd"){
             setCalculated(amount * (1 / rate1))
         }else {
             setCalculated(amount * ((1 / rate1) * rate2))

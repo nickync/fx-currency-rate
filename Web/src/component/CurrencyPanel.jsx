@@ -1,4 +1,4 @@
-import { Form, FormControl, InputGroup, Modal, Table } from "react-bootstrap";
+import { Form, InputGroup, Table } from "react-bootstrap";
 import { getDefinition, getRate } from "../api/curencyAPI";
 import { useEffect, useState } from "react";
 import Conversion from "./Conversion";

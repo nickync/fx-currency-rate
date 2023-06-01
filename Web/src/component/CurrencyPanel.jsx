@@ -57,13 +57,53 @@ export default function CurrencyPanel() {
 
     const onClic = (ccy) => {
       setCcy(ccy)
+      setTimeout(() => {
+        setBtnColor('btn btn-secondary')
+      }, 1000);
+      setBtnColor("btn btn-success")
     }
+
+    const [option, setOption] = useState({})
+    const [btnColor, setBtnColor] = useState('btn btn-success')
+
+    useEffect(() => {
+      let date = new Date("2022-01-02")
+      const arr = []
+      while (date < new Date()){
+          const first = format(date)
+          let obj = {}
+          obj['label'] = first
+
+          getRate(first).then(res => {
+              obj['y'] = res.data.usd[ccy]
+          })
+
+          arr.push(obj)
+          let newDate = new Date(date)
+          newDate.setDate(date.getDate() + 7)
+          date = newDate
+      }
+
+      const ops = {
+        title: {
+            text: ccy
+        },
+        data: [{
+            type:"line",
+            dataPoints:arr
+        }]
+    }
+    setOption(ops)
+  },[ccy])
+
+  useEffect(() => {
+    console.log(option.data)
+  },[option])
 
   return (
     <>
       <Conversion data={data}/>
-      <LineGraph ccy={ccy}/>
-      <div className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">All Rate Information</div>
+      <div className="bg-secondary text-center mt-5 mb-1 text-white fw-bold p-2">All Rate Information</div>
       <div className="d-flex mx-auto my-1">
         <InputGroup size="sm" className="pe-1">
           <InputGroup.Text>Enter a date: </InputGroup.Text>
@@ -76,12 +116,13 @@ export default function CurrencyPanel() {
         </InputGroup>
       </div>
       {show ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Free version of this app only contains data from 01-01-2022, some dates might be unavailable.</div> : ""}
-      <div className="mx-auto my-1" style={{maxHeight:"70vh", overflowY:"auto"}}>
+      <div className="mx-auto my-1 w-75" style={{maxHeight:"70vh", overflowY:"auto"}}>
         <Table striped bordered hover className="w-100 mx-auto text-center">
           <thead>
             <tr className="table-dark">
               <th>Currency</th>
               <th>Rate ( 1 USD equals )</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -97,11 +138,12 @@ export default function CurrencyPanel() {
                           <tr key={row[0]}>
                             <th>{row[0]}</th>
                             <th>{row[1]}</th>
-                            <th><button  onClick={() => onClic(row[0])}>asdf</button></th>
+                            <th><button className={btnColor} onClick={() => onClic(row[0])}>Show chart</button></th>
                           </tr>)}
           </tbody>
         </Table>
       </div>
+      <LineGraph ccy={ccy} option={option}/>
     </>
   )
 }

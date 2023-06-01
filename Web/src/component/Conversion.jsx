@@ -48,8 +48,8 @@ export default function Conversion({data}) {
     },[selected, selectedBase, amount])
 
   return (
-    <div className="mx-auto">
-        <div className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">Conversion</div>
+    <div className="mx-auto mt-3 bg-secondary p-2">
+        <div className="text-center mt-3 mb-1 text-white fw-bold">Conversion</div>
         <div className="d-flex">
             <InputGroup size="sm">
                 <InputGroup.Text>Amount</InputGroup.Text>

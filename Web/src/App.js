@@ -8,11 +8,11 @@ import LineGraph from './component/LineGraph';
 
 function App() {
   return (
-    <div>
+    <div className='bg-light bg-gradient'>
         <Header />
         <CurrencyPanel />
         
-        <div className='footer bg-dark fixed-bottom'>
+        <div className='footer bg-dark'>
           <div className='footer text-secondary text-center'>Zen</div>
         </div>
     </div>

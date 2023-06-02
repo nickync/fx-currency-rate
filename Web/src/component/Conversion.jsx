@@ -4,13 +4,12 @@ import { Typeahead } from "react-bootstrap-typeahead";
 
 export default function Conversion({data}) {
     const [ccy, setCcy] = useState(data)
-    const [selected, setSelected] = useState([])
-    const [selectedBase, setSelectedBase] = useState([])  
+    const [selected, setSelected] = useState('')
+    const [selectedBase, setSelectedBase] = useState('')  
     const [calculated, setCalculated] = useState(0)
     const [amount, setAmount] = useState(1)
 
     const handleAmountChange = (event) => {
-        console.log(event.target.value)
         setAmount(event.target.value)
     }
 
@@ -24,10 +23,10 @@ export default function Conversion({data}) {
         let rate1, rate2
 
         data.filter(i => {
-            if (i[0] === base){
-                rate1 = i[1]
-            } else if (i[0] === over){
-                rate2 = i[1]
+            if (i[0] == base){
+                return rate1 = i[1]
+            } else if (i[0] == over){
+                return rate2 = i[1]
             }
         })
 
@@ -38,8 +37,6 @@ export default function Conversion({data}) {
         }else {
             setCalculated(amount * ((1 / rate1) * rate2))
         }
-
-        console.log((1 / rate1) * rate2)
     }
 
     useEffect(() => {

@@ -10,6 +10,8 @@ export default function CurrencyPanel() {
   const [filter, setFilter] = useState("")
   const [show, setShow] = useState(false)
   const [definition, setDefinition] = useState({})
+  const [future, setFuture] = useState(false)
+  const [day, setDay] = useState(7)
 
   useEffect( () => {
     getDefinition().then(res => {
@@ -18,7 +20,13 @@ export default function CurrencyPanel() {
   },[])
 
   const handleDateChange = (event) => {
-    setDate(event.target.value)
+    const inputDate = new Date(event.target.value)
+    if (inputDate > new Date()){
+      setFuture(true)
+    } else {
+      setDate(event.target.value)
+      setFuture(false)
+    }
   }
 
   const handleCurrencyChange = (event) => {
@@ -63,24 +71,34 @@ export default function CurrencyPanel() {
       setBtnColor("btn btn-success")
     }
 
+    const onClickDay = (day) => {
+      setDay(day)
+      setTimeout(() => {
+        setBtnColor('btn btn-secondary')
+      }, 1000);
+      setBtnColor("btn btn-success")
+    }
+
     const [option, setOption] = useState({})
     const [btnColor, setBtnColor] = useState('btn btn-success')
 
     useEffect(() => {
       let date = new Date("2022-01-02")
       const arr = []
-      while (date < new Date()){
+      while (date <= new Date()){
           const first = format(date)
           let obj = {}
           obj['label'] = first
 
           getRate(first).then(res => {
               obj['y'] = res.data.usd[ccy]
+          }).catch(e => {
+            console.log("skipping " + first)
           })
 
           arr.push(obj)
           let newDate = new Date(date)
-          newDate.setDate(date.getDate() + 7)
+          newDate.setDate(date.getDate() + day)
           date = newDate
       }
 
@@ -94,7 +112,7 @@ export default function CurrencyPanel() {
         }]
     }
     setOption(ops)
-  },[ccy])
+  },[ccy, day])
 
   useEffect(() => {
     console.log(option.data)
@@ -115,7 +133,9 @@ export default function CurrencyPanel() {
           <Form.Control placeholder="Type in a currency" type="text" onChange={handleCurrencyChange}/>
         </InputGroup>
       </div>
-      {show ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Free version of this app only contains data from 01-01-2022, some dates might be unavailable.</div> : ""}
+      { future ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Who doesnt like Back to the Future!!!!</div> :
+        show && !future ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Free version of this app only contains data from 01-01-2022, and some dates might be unavailable from provider.</div> :
+         "" }
       <div className="mx-auto my-1 w-75" style={{maxHeight:"70vh", overflowY:"auto"}}>
         <Table striped bordered hover className="w-100 mx-auto text-center">
           <thead>
@@ -136,12 +156,18 @@ export default function CurrencyPanel() {
               })
               .map( row => 
                           <tr key={row[0]}>
-                            <th>{row[0]}</th>
+                            <th className="text-uppercase">{row[0]}</th>
                             <th>{row[1]}</th>
                             <th><button className={btnColor} onClick={() => onClic(row[0])}>Show chart</button></th>
                           </tr>)}
           </tbody>
         </Table>
+      </div>
+      <div className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">Historical Rate Information</div>
+      <div className="d-flex justify-content-center">
+        <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(1)}>Daily</button>
+        <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(7)}>Weekly</button>
+        <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(31)}>Monthly</button>
       </div>
       <LineGraph ccy={ccy} option={option}/>
     </>

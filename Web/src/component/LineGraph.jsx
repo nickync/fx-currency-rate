@@ -61,7 +61,6 @@ export default function LineGraph({option}) {
 
   return (
     <div className="pb-3">
-        <div className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">Historical Rate Information</div>
         <CanvasJSChart options={option} />
     </div>
   )

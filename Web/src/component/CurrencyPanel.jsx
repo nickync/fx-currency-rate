@@ -1,6 +1,6 @@
 import { Form, InputGroup, Table } from "react-bootstrap";
 import { getDefinition, getRate } from "../api/curencyAPI";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Conversion from "./Conversion";
 import LineGraph from "./LineGraph";
 
@@ -12,6 +12,9 @@ export default function CurrencyPanel() {
   const [definition, setDefinition] = useState({})
   const [future, setFuture] = useState(false)
   const [day, setDay] = useState(7)
+  const viewChart = useRef(null)
+
+  const scrollToChart = () => viewChart.current.scrollIntoView()
 
   useEffect( () => {
     getDefinition().then(res => {
@@ -69,6 +72,7 @@ export default function CurrencyPanel() {
         setBtnColor('btn btn-secondary')
       }, 1000);
       setBtnColor("btn btn-success")
+      scrollToChart()
     }
 
     const onClickDay = (day) => {
@@ -104,7 +108,7 @@ export default function CurrencyPanel() {
 
       const ops = {
         title: {
-            text: ccy
+            text: ccy.toUpperCase()
         },
         data: [{
             type:"line",
@@ -122,13 +126,13 @@ export default function CurrencyPanel() {
     <>
       <Conversion data={data}/>
       <div className="bg-secondary text-center mt-5 mb-1 text-white fw-bold p-2">All Rate Information</div>
-      <div className="d-flex mx-auto my-1">
-        <InputGroup size="sm" className="pe-1">
+      <div className="d-flex flex-wrap mx-auto my-1">
+        <InputGroup size="sm" className="pe-1 w-50">
           <InputGroup.Text>Enter a date: </InputGroup.Text>
           <Form.Control placeholder="today" type="date" onChange={handleDateChange}></Form.Control>
         </InputGroup>
 
-        <InputGroup size="sm">
+        <InputGroup size="sm" className="w-50">
           <InputGroup.Text>Filter a currency</InputGroup.Text>
           <Form.Control placeholder="Type in a currency" type="text" onChange={handleCurrencyChange}/>
         </InputGroup>
@@ -136,12 +140,12 @@ export default function CurrencyPanel() {
       { future ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Who doesnt like Back to the Future!!!!</div> :
         show && !future ? <div className="alert alert-danger text-center w-50 mx-auto mt-1">Free version of this app only contains data from 01-01-2022, and some dates might be unavailable from provider.</div> :
          "" }
-      <div className="mx-auto my-1 w-75" style={{maxHeight:"70vh", overflowY:"auto"}}>
+      <div className="container" style={{maxHeight:"70vh", overflowY:"auto"}}>
         <Table striped bordered hover className="w-100 mx-auto text-center">
           <thead>
             <tr className="table-dark">
               <th>Currency</th>
-              <th>Rate ( 1 USD equals )</th>
+              <th>Rate (1 USD equals)</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -163,7 +167,7 @@ export default function CurrencyPanel() {
           </tbody>
         </Table>
       </div>
-      <div className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">Historical Rate Information</div>
+      <div ref={viewChart} className="bg-secondary text-center mt-3 mb-1 text-white fw-bold">Historical Rate Information</div>
       <div className="d-flex justify-content-center">
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(1)}>Daily</button>
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(7)}>Weekly</button>

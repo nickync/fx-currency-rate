@@ -86,6 +86,8 @@ export default function CurrencyPanel() {
     const [option, setOption] = useState({})
     const [btnColor, setBtnColor] = useState('btn btn-success')
 
+    const [vol, setVol] = useState([])
+
     useEffect(() => {
       let date = new Date("2022-01-02")
       const arr = []
@@ -115,12 +117,13 @@ export default function CurrencyPanel() {
             dataPoints:arr
         }]
     }
+    setVol(arr)
     setOption(ops)
   },[ccy, day])
 
   useEffect(() => {
-    console.log(option.data)
-  },[option])
+    console.log(vol)
+  },[option, vol])
 
   return (
     <>
@@ -172,6 +175,9 @@ export default function CurrencyPanel() {
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(1)}>Daily</button>
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(7)}>Weekly</button>
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(31)}>Monthly</button>
+      </div>
+      <div>
+        <label>Volatility</label>
       </div>
       <LineGraph ccy={ccy} option={option}/>
     </>

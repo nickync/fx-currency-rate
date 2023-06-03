@@ -177,7 +177,7 @@ export default function CurrencyPanel() {
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(31)}>Monthly</button>
       </div>
       <div>
-        <label>Volatility</label>
+        <label>Volatility todo</label>
       </div>
       <LineGraph ccy={ccy} option={option}/>
     </>

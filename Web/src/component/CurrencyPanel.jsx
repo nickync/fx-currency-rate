@@ -125,7 +125,7 @@ export default function CurrencyPanel() {
   return (
     <>
       <Conversion data={data}/>
-      <div className="bg-secondary text-center mt-5 mb-1 text-white fw-bold p-2">All Rate Information</div>
+      <div className="bg-secondary text-center mb-1 text-white fw-bold p-2">All Rate Information</div>
       <div className="d-flex flex-wrap mx-auto my-1">
         <InputGroup size="sm" className="pe-1 w-50">
           <InputGroup.Text>Enter a date: </InputGroup.Text>

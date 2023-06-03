@@ -46,8 +46,8 @@ export default function Conversion({data}) {
     },[selected, selectedBase, amount])
 
   return (
-    <div className="d-flex flex-column align-items-center mx-auto mt-3 bg-secondary p-2">
-        <div className="text-center mt-3 mb-1 text-white fw-bold">Conversion</div>
+    <div className="d-flex flex-column align-items-center mx-auto mt-3 pt5 bg-success bg-gradient p-2">
+        <div className="text-center mt-3 mb-1 pt-2 text-white fw-bold">Conversion</div>
         <div className="d-flex flex-wrap justify-content-center pb-5">
             <div className="d-flex flex-row">
                 <div>

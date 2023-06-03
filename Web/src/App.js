@@ -14,7 +14,7 @@ function App() {
         <Header />
         <Routes>
           {["/", "/home"].map((path, index) => <Route path={path} key={index} element={ <CurrencyPanel />} />)}
-          <Route path='about' element={ <About /> } />
+          <Route path="/about" element={ <About /> } />
         </Routes>
         <Footer />
     </HashRouter>

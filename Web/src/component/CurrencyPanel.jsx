@@ -1,8 +1,9 @@
-import { Form, InputGroup, Table } from "react-bootstrap";
+import { Card, Form, InputGroup, Table } from "react-bootstrap";
 import { getDefinition, getRate } from "../api/curencyAPI";
 import { useEffect, useRef, useState } from "react";
 import Conversion from "./Conversion";
 import LineGraph from "./LineGraph";
+import Marquee from "react-fast-marquee";
 
 export default function CurrencyPanel() {
   const [data, setData] = useState([])
@@ -48,12 +49,14 @@ export default function CurrencyPanel() {
     return `${year}-${month}-${day}`
   }
 
+  const cardCCY = ['jpy', 'eur', 'cny', 'aud', 'btc', 'cad', 'gbp']
+  const flag = {'jpy':'/JP.svg', 'eur':'/EU.svg', 'cny':'/CN.svg', 'aud':'/AU.svg','btc':'/btc.svg', 'cad':'/CA.svg', 'gbp':'GB.svg'}
+
   useEffect(() => {
     const formattedDate = format(date)
     getRate(formattedDate).then(res => {
       if (res.status === 200){
         const arr = Object.entries(res.data.usd)
-        // setData(res.data.usd)
         setData(arr)
         setShow(false)
       } else {
@@ -127,6 +130,25 @@ export default function CurrencyPanel() {
 
   return (
     <>
+      <Marquee className="mt-5">
+        {
+          data.filter(ccy => {
+            if (cardCCY.includes(ccy[0])){
+              return true
+            }
+          }).map(ccy =>       
+            <Card style={{width:'18rem'}}>
+              <Card.Body className="bg-success bg-gradient text-center">
+                <img className="mb-1" src={flag[ccy[0]]} style={{width: '3rem', height:'4rem'}}/>
+                {ccy[0] == 'btc' ? <Card.Title className="text-uppercase text-light">USD/{ccy[0]}</Card.Title> : <Card.Title className="text-uppercase text-light">{ccy[0]}/USD</Card.Title>}
+                
+                <Card.Text className="text-warning">{ccy[0] == 'btc' ? 1/ccy[1] : ccy[1]}</Card.Text>
+              </Card.Body>
+            </Card>
+            )
+          }
+      </Marquee>
+
       <Conversion data={data}/>
       <div className="bg-secondary text-center mb-1 text-white fw-bold p-2">All Rate Information</div>
       <div className="d-flex flex-wrap mx-auto my-1">

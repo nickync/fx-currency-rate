@@ -142,7 +142,17 @@ export default function CurrencyPanel() {
                 <img className="mb-1" src={flag[ccy[0]]} style={{width: '3rem', height:'4rem'}}/>
                 {ccy[0] == 'btc' ? <Card.Title className="text-uppercase text-light">USD/{ccy[0]}</Card.Title> : <Card.Title className="text-uppercase text-light">{ccy[0]}/USD</Card.Title>}
                 
-                <Card.Text className="text-warning">{ccy[0] == 'btc' ? 1/ccy[1] : ccy[1]}</Card.Text>
+                <Card.Text className="text-warning d-inline-flex align-items-end">{ccy[0] == 'btc' ? 
+                <>
+                  <div className="fs-6 fw-bold">{(1/ccy[1]).toFixed(8).toString().split('.')[0]}.</div>
+                  <div className="fs-6">{(1/ccy[1]).toFixed(8).toString().split('.')[1]}</div>
+                </> 
+                :
+                <>
+                  <div className="fs-6 fw-bold">{ccy[1].toString().split('.')[0]}.</div>
+                  <div className="fs-6">{ccy[1].toString().split('.')[1]}</div>
+                </>
+                }</Card.Text>
               </Card.Body>
             </Card>
             )
@@ -151,13 +161,13 @@ export default function CurrencyPanel() {
 
       <Conversion data={data}/>
       <div className="bg-secondary text-center mb-1 text-white fw-bold p-2">All Rate Information</div>
-      <div className="d-flex flex-wrap mx-auto my-1">
-        <InputGroup size="sm" className="pe-1 w-50">
+      <div className="d-flex mx-auto my-1 rate-filter">
+        <InputGroup size="sm" className="pe-1">
           <InputGroup.Text>Enter a date: </InputGroup.Text>
           <Form.Control placeholder="today" type="date" onChange={handleDateChange}></Form.Control>
         </InputGroup>
 
-        <InputGroup size="sm" className="w-50">
+        <InputGroup size="sm">
           <InputGroup.Text>Filter a currency</InputGroup.Text>
           <Form.Control placeholder="Type in a currency" type="text" onChange={handleCurrencyChange}/>
         </InputGroup>

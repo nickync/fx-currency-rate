@@ -45,4 +45,8 @@
   .rolling-card {
     width: 10rem;
   }
+
+  .rate-filter {
+    flex-direction: column;
+  }
 }

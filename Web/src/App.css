@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.rolling-card {
+  width: 18rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .rolling-card {
+    width: 10rem;
+  }
+}

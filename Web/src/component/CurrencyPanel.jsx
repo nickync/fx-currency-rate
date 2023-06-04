@@ -137,7 +137,7 @@ export default function CurrencyPanel() {
               return true
             }
           }).map(ccy =>       
-            <Card style={{width:'18rem'}}>
+            <Card className="rolling-card">
               <Card.Body className="bg-success bg-gradient text-center">
                 <img className="mb-1" src={flag[ccy[0]]} style={{width: '3rem', height:'4rem'}}/>
                 {ccy[0] == 'btc' ? <Card.Title className="text-uppercase text-light">USD/{ccy[0]}</Card.Title> : <Card.Title className="text-uppercase text-light">{ccy[0]}/USD</Card.Title>}

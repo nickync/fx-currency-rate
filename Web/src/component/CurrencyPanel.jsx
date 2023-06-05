@@ -89,8 +89,6 @@ export default function CurrencyPanel() {
     const [option, setOption] = useState({})
     const [btnColor, setBtnColor] = useState('btn btn-success')
 
-    const [vol, setVol] = useState([])
-
     useEffect(() => {
       let date = new Date("2022-01-02")
       const arr = []
@@ -120,13 +118,13 @@ export default function CurrencyPanel() {
             dataPoints:arr
         }]
     }
-    setVol(arr)
+
     setOption(ops)
   },[ccy, day])
 
   useEffect(() => {
-    console.log(vol)
-  },[option, vol])
+    // console.log(vol)
+  },[option])
 
   return (
     <>
@@ -137,7 +135,7 @@ export default function CurrencyPanel() {
               return true
             }
           }).map(ccy =>       
-            <Card className="rolling-card">
+            <Card className="rolling-card me-2">
               <Card.Body className="bg-success bg-gradient text-center">
                 <img className="mb-1" src={flag[ccy[0]]} style={{width: '3rem', height:'4rem'}}/>
                 {ccy[0] == 'btc' ? <Card.Title className="text-uppercase text-light">USD/{ccy[0]}</Card.Title> : <Card.Title className="text-uppercase text-light">{ccy[0]}/USD</Card.Title>}
@@ -208,9 +206,7 @@ export default function CurrencyPanel() {
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(7)}>Weekly</button>
         <button className="btn btn-sm btn-secondary bg-gradient mx-1" onClick={() => onClickDay(31)}>Monthly</button>
       </div>
-      <div>
-        <label>Volatility todo</label>
-      </div>
+
       <LineGraph ccy={ccy} option={option}/>
     </>
   )

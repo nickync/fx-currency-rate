@@ -11,14 +11,14 @@ export default function Header() {
 
 
   return (
-    <Navbar className="py-0 fixed-top bg-gradient" variant="dark" bg="dark" expand="lg">
-      <Container>
-       <Navbar.Brand className="mx-auto fw-bold text-success" href="/">FX currency finder</Navbar.Brand>
+    <Navbar className="py-0 fixed-top bg-gradient" bg="success" expand="lg">
+      <Container className="d-flex flex-md-row-reverse">
+       <Navbar.Brand className="mx-auto fw-bold text-warning" href="/">FX currency finder</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link onClick={aboutPage}>About this site</Nav.Link>
+          <Nav className="ms-5">
+            <Nav.Link className="text-light" href="/">Home</Nav.Link>
+            <Nav.Link className="text-light" onClick={aboutPage}>About this site</Nav.Link>
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

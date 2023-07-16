@@ -185,7 +185,7 @@ export default function CurrencyPanel() {
           <tbody>
             {data
               .filter(row => {
-                if(row[0].includes(filter.toLowerCase())){
+                if(row[0].includes(filter?.toLowerCase())){
                   return true
                 } else if (definition[row[0]].toLowerCase().includes(filter.toLocaleLowerCase())){
                   return true
